@@ -81,7 +81,10 @@ export const listSchemaVersionsByType: { [x: string]: string[] } = {
   option: versionsListOption,
 };
 
-export const SubgraphBaseUrl = "https://api.thegraph.com/subgraphs/name/";
+export const BaseUrl = "https://hetnzer.graph.tdf-labs.io"
+
+export const SubgraphBaseUrl = `${BaseUrl}/subgraphs/name/`;
+
 export const PoolName: Record<string, string> = {
   EXCHANGE: "liquidityPool",
   LENDING: "market",

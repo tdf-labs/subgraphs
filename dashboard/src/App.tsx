@@ -11,6 +11,10 @@ import { NewClient, schemaMapping } from "./utils";
 import { useQuery } from "@apollo/client";
 import { decentralizedNetworkSubgraphsQuery } from "./queries/decentralizedNetworkSubgraphsQuery";
 
+const deployment = require('./development.json');
+
+// console.log('deployment: ', deployment);
+
 function App() {
   console.log("RUNNING VERSION " + dashboardVersion);
   const [protocolsToQuery, setProtocolsToQuery] = useState<{
@@ -44,22 +48,25 @@ function App() {
       });
   };
 
+  // const getDeployments = () => {
+  //   fetch("https://raw.githubusercontent.com/messari/subgraphs/master/deployment/deployment.json", {
+  //     method: "GET",
+  //     headers: {
+  //       Accept: "*/*",
+  //     },
+  //   })
+  //     .then(function (res) {
+  //       return res.json();
+  //     })
+  //     .then(function (json) {
+  //       setProtocolsToQuery(json);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
   const getDeployments = () => {
-    fetch("https://raw.githubusercontent.com/messari/subgraphs/master/deployment/deployment.json", {
-      method: "GET",
-      headers: {
-        Accept: "*/*",
-      },
-    })
-      .then(function (res) {
-        return res.json();
-      })
-      .then(function (json) {
-        setProtocolsToQuery(json);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    setProtocolsToQuery(deployment);
   };
 
   const aliasToProtocol: { [x: string]: string } = {};
@@ -167,12 +174,12 @@ function App() {
       ) {
         return;
       }
-      fullCurrentQueryArray[fullCurrentQueryArray.length - 1] += `      
+      fullCurrentQueryArray[fullCurrentQueryArray.length - 1] += `
                 ${name.split("-").join("_")}: indexingStatusForCurrentVersion(subgraphName: "messari/${name}") {
                   ${queryContents}
                 }
             `;
-      fullPendingQueryArray[fullPendingQueryArray.length - 1] += `      
+      fullPendingQueryArray[fullPendingQueryArray.length - 1] += `
               ${name.split("-").join("_")}_pending: indexingStatusForPendingVersion(subgraphName: "messari/${name}") {
                 ${queryContents}
               }

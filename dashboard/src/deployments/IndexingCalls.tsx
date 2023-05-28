@@ -2,6 +2,7 @@ import { styled } from "../styled";
 import { NewClient } from "../utils";
 import { useEffect, useMemo } from "react";
 import { gql, useLazyQuery } from "@apollo/client";
+import { BaseUrl } from "../constants";
 
 const DeploymentsLayout = styled("div")`
   padding: 0;
@@ -21,6 +22,21 @@ interface IndexingCallsProps {
   indexingStatusErrorPending: any;
 }
 
+function _helper(query: string, client: any): [any, { data: any, error: any, loading: any }] {
+  try {
+    return useLazyQuery(
+      gql`
+      ${query}
+    `,
+      {
+        client,
+      },
+    ) as [any, { data: any, error: any, loading: any }];
+  } catch (err) {
+    return [() => { }, { data: undefined, loading: undefined, error: undefined }];
+  }
+}
+
 function IndexingCalls({
   setIndexingStatus,
   setPendingIndexingStatus,
@@ -34,7 +50,8 @@ function IndexingCalls({
   indexingStatusError,
   indexingStatusErrorPending,
 }: IndexingCallsProps) {
-  const clientIndexing = useMemo(() => NewClient("https://api.thegraph.com/index-node/graphql"), []);
+  // const clientIndexing = useMemo(() => NewClient("https://api.thegraph.com/index-node/graphql"), []);
+  const clientIndexing = useMemo(() => NewClient(`${BaseUrl}/graphql`), []);
   let currentLendingQuery = indexingStatusQueries?.lending?.fullCurrentQueryArray?.join("");
   let currentDexAmmQuery = indexingStatusQueries?.exchanges?.fullCurrentQueryArray?.join("");
   let currentYieldAggQuery = indexingStatusQueries?.vaults?.fullCurrentQueryArray?.join("");
@@ -49,86 +66,14 @@ function IndexingCalls({
   let currentPerpFuturesQuery = indexingStatusQueries?.["derivatives-perpfutures"]?.fullCurrentQueryArray?.join("");
 
   // Generate query from subgraphEndpoints
-  const [fetchStatusLending, { data: statusLending, loading: statusLendingLoading, error: statusLendingError }] =
-    useLazyQuery(
-      gql`
-        ${currentLendingQuery}
-      `,
-      {
-        client: clientIndexing,
-      },
-    );
-
-  const [fetchStatusDexAmm, { data: statusDexAmm, loading: statusDexAmmLoading, error: statusDexAmmError }] =
-    useLazyQuery(
-      gql`
-        ${currentDexAmmQuery}
-      `,
-      {
-        client: clientIndexing,
-      },
-    );
-
-  const [fetchStatusYield, { data: statusYield, loading: statusYieldLoading, error: statusYieldError }] = useLazyQuery(
-    gql`
-      ${currentYieldAggQuery}
-    `,
-    {
-      client: clientIndexing,
-    },
-  );
-
-  const [fetchStatusGeneric, { data: statusGeneric, loading: statusGenericLoading, error: statusGenericError }] =
-    useLazyQuery(
-      gql`
-        ${currentGenericQuery}
-      `,
-      {
-        client: clientIndexing,
-      },
-    );
-
-  const [fetchStatusBridge, { data: statusBridge, loading: statusBridgeLoading, error: statusBridgeError }] =
-    useLazyQuery(
-      gql`
-        ${currentBridgeQuery}
-      `,
-      {
-        client: clientIndexing,
-      },
-    );
-
-  const [fetchStatusErc20, { data: statusErc20, loading: statusErc20Loading, error: statusErc20Error }] = useLazyQuery(
-    gql`
-      ${currentErc20Query}
-    `,
-    {
-      client: clientIndexing,
-    },
-  );
-
-  const [fetchStatusErc721, { data: statusErc721, loading: statusErc721Loading, error: statusErc721Error }] =
-    useLazyQuery(
-      gql`
-        ${currentErc721Query}
-      `,
-      {
-        client: clientIndexing,
-      },
-    );
-
-  const [
-    fetchStatusGovernance,
-    { data: statusGovernance, loading: statusGovernanceLoading, error: statusGovernanceError },
-  ] = useLazyQuery(
-    gql`
-      ${currentGovernanceQuery}
-    `,
-    {
-      client: clientIndexing,
-    },
-  );
-
+  const [fetchStatusLending, { data: statusLending, loading: statusLendingLoading, error: statusLendingError }] = _helper(currentLendingQuery, clientIndexing);
+  const [fetchStatusDexAmm, { data: statusDexAmm, loading: statusDexAmmLoading, error: statusDexAmmError }] = _helper(currentDexAmmQuery, clientIndexing);
+  const [fetchStatusYield, { data: statusYield, loading: statusYieldLoading, error: statusYieldError }] = _helper(currentYieldAggQuery, clientIndexing);
+  const [fetchStatusGeneric, { data: statusGeneric, loading: statusGenericLoading, error: statusGenericError }] = _helper(currentGenericQuery, clientIndexing);
+  const [fetchStatusBridge, { data: statusBridge, loading: statusBridgeLoading, error: statusBridgeError }] = _helper(currentBridgeQuery, clientIndexing);
+  const [fetchStatusErc20, { data: statusErc20, loading: statusErc20Loading, error: statusErc20Error }] = _helper(currentErc20Query, clientIndexing);
+  const [fetchStatusErc721, { data: statusErc721, loading: statusErc721Loading, error: statusErc721Error }] = _helper(currentErc721Query, clientIndexing);
+  const [fetchStatusGovernance, { data: statusGovernance, loading: statusGovernanceLoading, error: statusGovernanceError }] = _helper(currentGovernanceQuery, clientIndexing);
   // const [fetchStatusNetwork, { data: statusNetwork, loading: statusNetworkLoading, error: statusNetworkError }] =
   //   useLazyQuery(
   //     gql`
@@ -138,37 +83,9 @@ function IndexingCalls({
   //       client: clientIndexing,
   //     },
   //   );
-
-  const [fetchStatusNFT, { data: statusNFT, loading: statusNFTLoading, error: statusNFTError }] = useLazyQuery(
-    gql`
-      ${currentNFTQuery}
-    `,
-    {
-      client: clientIndexing,
-    },
-  );
-
-  const [fetchStatusOptions, { data: statusOptions, loading: statusOptionsLoading, error: statusOptionsError }] =
-    useLazyQuery(
-      gql`
-        ${currentOptionsQuery}
-      `,
-      {
-        client: clientIndexing,
-      },
-    );
-
-  const [
-    fetchStatusPerpFutures,
-    { data: statusPerpFutures, loading: statusPerpFuturesLoading, error: statusPerpFuturesError },
-  ] = useLazyQuery(
-    gql`
-      ${currentPerpFuturesQuery}
-    `,
-    {
-      client: clientIndexing,
-    },
-  );
+  const [fetchStatusNFT, { data: statusNFT, loading: statusNFTLoading, error: statusNFTError }] = _helper(currentNFTQuery, clientIndexing);
+  const [fetchStatusOptions, { data: statusOptions, loading: statusOptionsLoading, error: statusOptionsError }] = _helper(currentOptionsQuery, clientIndexing);
+  const [fetchStatusPerpFutures, { data: statusPerpFutures, loading: statusPerpFuturesLoading, error: statusPerpFuturesError }] = _helper(currentPerpFuturesQuery, clientIndexing);
 
   let pendingLendingQuery = indexingStatusQueries?.lending?.fullPendingQueryArray?.join("");
   let pendingDexAmmQuery = indexingStatusQueries?.exchanges?.fullPendingQueryArray?.join("");
@@ -183,102 +100,14 @@ function IndexingCalls({
   let pendingOptionsQuery = indexingStatusQueries?.["derivatives-options"]?.fullPendingQueryArray?.join("");
   let pendingPerpFuturesQuery = indexingStatusQueries?.["derivatives-perpfutures"]?.fullPendingQueryArray?.join("");
 
-  const [
-    fetchStatusLendingPending,
-    { data: statusLendingPending, loading: statusLendingPendingLoading, error: statusLendingPendingError },
-  ] = useLazyQuery(
-    gql`
-      ${pendingLendingQuery}
-    `,
-    {
-      client: clientIndexing,
-    },
-  );
-
-  const [
-    fetchStatusDexAmmPending,
-    { data: statusDexAmmPending, loading: statusDexAmmPendingLoading, error: statusDexAmmPendingError },
-  ] = useLazyQuery(
-    gql`
-      ${pendingDexAmmQuery}
-    `,
-    {
-      client: clientIndexing,
-    },
-  );
-
-  const [
-    fetchStatusYieldPending,
-    { data: statusYieldPending, loading: statusYieldPendingLoading, error: statusYieldPendingError },
-  ] = useLazyQuery(
-    gql`
-      ${pendingYieldAggQuery}
-    `,
-    {
-      client: clientIndexing,
-    },
-  );
-
-  const [
-    fetchStatusGenericPending,
-    { data: statusGenericPending, loading: statusGenericPendingLoading, error: statusGenericPendingError },
-  ] = useLazyQuery(
-    gql`
-      ${pendingGenericQuery}
-    `,
-    {
-      client: clientIndexing,
-    },
-  );
-
-  const [
-    fetchStatusBridgePending,
-    { data: statusBridgePending, loading: statusBridgePendingLoading, error: statusBridgePendingError },
-  ] = useLazyQuery(
-    gql`
-      ${pendingBridgeQuery}
-    `,
-    {
-      client: clientIndexing,
-    },
-  );
-
-  const [
-    fetchStatusErc20Pending,
-    { data: statusErc20Pending, loading: statusErc20PendingLoading, error: statusErc20PendingError },
-  ] = useLazyQuery(
-    gql`
-      ${pendingErc20Query}
-    `,
-    {
-      client: clientIndexing,
-    },
-  );
-
-  const [
-    fetchStatusErc721Pending,
-    { data: statusErc721Pending, loading: statusErc721PendingLoading, error: statusErc721PendingError },
-  ] = useLazyQuery(
-    gql`
-      ${pendingErc721Query}
-    `,
-    {
-      client: clientIndexing,
-    },
-  );
-
-  const [
-    fetchStatusGovernancePending,
-    { data: statusGovernancePending, loading: statusGovernancePendingLoading, error: statusGovernancePendingError },
-  ] = useLazyQuery(
-    gql`
-      ${pendingGovernanceQuery}
-    `,
-    {
-      client: clientIndexing,
-    },
-  );
-
+  const [fetchStatusLendingPending, { data: statusLendingPending, loading: statusLendingPendingLoading, error: statusLendingPendingError },] = _helper(pendingLendingQuery, clientIndexing);
+  const [fetchStatusDexAmmPending, { data: statusDexAmmPending, loading: statusDexAmmPendingLoading, error: statusDexAmmPendingError },] = _helper(pendingDexAmmQuery, clientIndexing);
+  const [fetchStatusYieldPending, { data: statusYieldPending, loading: statusYieldPendingLoading, error: statusYieldPendingError },] = _helper(pendingYieldAggQuery, clientIndexing);
+  const [fetchStatusGenericPending, { data: statusGenericPending, loading: statusGenericPendingLoading, error: statusGenericPendingError },] = _helper(pendingGenericQuery, clientIndexing);
+  const [fetchStatusBridgePending, { data: statusBridgePending, loading: statusBridgePendingLoading, error: statusBridgePendingError },] = _helper(pendingBridgeQuery, clientIndexing);
+  const [fetchStatusErc20Pending, { data: statusErc20Pending, loading: statusErc20PendingLoading, error: statusErc20PendingError },] = _helper(pendingErc20Query, clientIndexing);
+  const [fetchStatusErc721Pending, { data: statusErc721Pending, loading: statusErc721PendingLoading, error: statusErc721PendingError },] = _helper(pendingErc721Query, clientIndexing);
+  const [fetchStatusGovernancePending, { data: statusGovernancePending, loading: statusGovernancePendingLoading, error: statusGovernancePendingError },] = _helper(pendingGovernanceQuery, clientIndexing);
   // const [
   //   fetchStatusNetworkPending,
   //   { data: statusNetworkPending, loading: statusNetworkPendingLoading, error: statusNetworkPendingError },
@@ -290,42 +119,9 @@ function IndexingCalls({
   //     client: clientIndexing,
   //   },
   // );
-
-  const [
-    fetchStatusNFTPending,
-    { data: statusNFTPending, loading: statusNFTPendingLoading, error: statusNFTPendingError },
-  ] = useLazyQuery(
-    gql`
-      ${pendingNFTQuery}
-    `,
-    {
-      client: clientIndexing,
-    },
-  );
-
-  const [
-    fetchStatusOptionsPending,
-    { data: statusOptionsPending, loading: statusOptionsPendingLoading, error: statusOptionsPendingError },
-  ] = useLazyQuery(
-    gql`
-      ${pendingOptionsQuery}
-    `,
-    {
-      client: clientIndexing,
-    },
-  );
-
-  const [
-    fetchStatusPerpFuturesPending,
-    { data: statusPerpFuturesPending, loading: statusPerpFuturesPendingLoading, error: statusPerpFuturesPendingError },
-  ] = useLazyQuery(
-    gql`
-      ${pendingPerpFuturesQuery}
-    `,
-    {
-      client: clientIndexing,
-    },
-  );
+  const [fetchStatusNFTPending, { data: statusNFTPending, loading: statusNFTPendingLoading, error: statusNFTPendingError },] = _helper(pendingNFTQuery, clientIndexing);
+  const [fetchStatusOptionsPending, { data: statusOptionsPending, loading: statusOptionsPendingLoading, error: statusOptionsPendingError },] = _helper(pendingOptionsQuery, clientIndexing);
+  const [fetchStatusPerpFuturesPending, { data: statusPerpFuturesPending, loading: statusPerpFuturesPendingLoading, error: statusPerpFuturesPendingError },] = _helper(pendingPerpFuturesQuery, clientIndexing);
 
   useEffect(() => {
     fetchStatusLending();

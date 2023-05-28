@@ -138,7 +138,7 @@ function DeploymentsPage({
     });
 
     const subgraphIdString = JSON.stringify(depoIds);
-    decentralizedDepoQuery = `query Status { indexingStatuses(subgraphs: ${subgraphIdString} ) { 
+    decentralizedDepoQuery = `query Status { indexingStatuses(subgraphs: ${subgraphIdString} ) {
           subgraph
           synced
           fatalError {
