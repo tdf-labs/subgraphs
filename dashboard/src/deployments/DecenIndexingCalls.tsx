@@ -2,6 +2,7 @@ import { styled } from "../styled";
 import { NewClient } from "../utils";
 import { useEffect, useMemo } from "react";
 import { gql, useLazyQuery } from "@apollo/client";
+import { BaseUrl } from "../constants";
 
 const DeploymentsLayout = styled("div")`
   padding: 0;
@@ -18,7 +19,8 @@ function DecenIndexingCalls({
   decentralizedDepoQuery,
   depoIdToSubgraphName,
 }: DecenIndexingCallsProps) {
-  const clientIndexing = useMemo(() => NewClient("https://api.thegraph.com/index-node/graphql"), []);
+  // const clientIndexing = useMemo(() => NewClient("https://api.thegraph.com/index-node/graphql"), []);
+  const clientIndexing = useMemo(() => NewClient(`${BaseUrl}/graphql`), []);
 
   // Decentralized deployment query
   const [fetchStatusDecen, { data: statusDecen, loading: statusDecenLoading }] = useLazyQuery(

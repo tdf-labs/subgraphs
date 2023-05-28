@@ -33,7 +33,7 @@ https
       });
       fullCurrentQueryArray[fullCurrentQueryArray.length - 1] += "}";
       const indexingStatusQueries = [...fullCurrentQueryArray];
-
+      console.log('indexingStatusQueries: ', indexingStatusQueries);
       const statusQueryPromiseArr = indexingStatusQueries.map((query) => {
         const options = {
           hostname: "api.thegraph.com",

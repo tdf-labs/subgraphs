@@ -5,6 +5,7 @@ import { Chart as ChartJS, registerables, PointElement } from "chart.js";
 import FetchSubgraphVersion from "./FetchSubgraphVersion";
 import { useNavigate } from "react-router";
 import FetchIndexingStatusForType from "./FetchIndexingStatusForType";
+import { BaseUrl } from '../constants';
 
 interface VersionComparisonProps {
   protocolsToQuery: { [x: string]: any };
@@ -96,28 +97,30 @@ function VersionComparison({ protocolsToQuery, getData }: VersionComparisonProps
       <>
         {prodDeploymentsToQuery.map((depo: any) => {
           let slug = depo?.["services"]?.["hosted-service"]?.["slug"];
-          let endpoint = "https://api.thegraph.com/subgraphs/name/messari/" + slug;
+          // let endpoint = "https://api.thegraph.com/subgraphs/name/messari/" + slug;
+          let endpoint = `${BaseUrl}/subgraphs/name/${slug}`;
           if (depo.network === "cronos") {
             slug = depo?.["services"]?.["cronos-portal"]?.["slug"];
             endpoint = "https://graph.cronoslabs.com/subgraphs/name/messari/" + slug;
           }
-          slugToQueryString[slug] = "messari/" + slug;
+          // slugToQueryString[slug] = "messari/" + slug;
+          slugToQueryString[slug] = slug;
           let decentralizedFetch = null;
-          if (depo?.["services"]?.["decentralized-network"]) {
-            let decenEndpoint =
-              "https://gateway.thegraph.com/api/" +
-              process.env.REACT_APP_GRAPH_API_KEY +
-              "/subgraphs/id/" +
-              depo?.["services"]?.["decentralized-network"]?.["query-id"];
-            slugToQueryString[slug + " (Decentralized)"] = decenEndpoint;
-            decentralizedFetch = (
-              <FetchSubgraphVersion
-                subgraphEndpoint={decenEndpoint}
-                slug={slug + " (Decentralized)"}
-                setDeployments={setSubgraphVersionMapping}
-              />
-            );
-          }
+          // if (depo?.["services"]?.["decentralized-network"]) {
+          //   let decenEndpoint =
+          //     "https://gateway.thegraph.com/api/" +
+          //     process.env.REACT_APP_GRAPH_API_KEY +
+          //     "/subgraphs/id/" +
+          //     depo?.["services"]?.["decentralized-network"]?.["query-id"];
+          //   slugToQueryString[slug + " (Decentralized)"] = decenEndpoint;
+          //   decentralizedFetch = (
+          //     <FetchSubgraphVersion
+          //       subgraphEndpoint={decenEndpoint}
+          //       slug={slug + " (Decentralized)"}
+          //       setDeployments={setSubgraphVersionMapping}
+          //     />
+          //   );
+          // }
           return (
             <>
               <FetchSubgraphVersion

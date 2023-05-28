@@ -5,7 +5,7 @@
     "protocol": "convex-finance",
     "project": "convex",
     "deployments": {
-      "convex-finance-ethereum": {
+      "convex-finance": {
         "network": "ethereum",
         "status": "prod",
         "versions": {
@@ -27,7 +27,7 @@
           },
           "decentralized-network": {
             "slug": "convex-finance",
-            "query-id": "CVVEQi1VRgQYwX5r6tPjD1Leiao2nETLYC6pHTWVNPtk"
+            "query-id": "convex-finance"
           }
         }
       }

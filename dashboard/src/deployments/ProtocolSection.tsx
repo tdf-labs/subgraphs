@@ -947,7 +947,8 @@ function ProtocolSection({
                       return;
                     }
                     if (!currentObject?.fatalError) {
-                      navigate(`subgraph?endpoint=${subgraphUrlBase}messari/${depo.hostedServiceId}&tab=protocol`);
+                      // navigate(`subgraph?endpoint=${subgraphUrlBase}messari/${depo.hostedServiceId}&tab=protocol`);
+                      navigate(`subgraph?endpoint=${depo.hostedServiceId}&tab=protocol`);
                     } else {
                       window.location.href = "https://okgraph.xyz/?q=messari/" + depo.hostedServiceId;
                     }
@@ -1145,7 +1146,8 @@ function ProtocolSection({
                     return;
                   }
                   if (!currentObject?.fatalError) {
-                    navigate(`subgraph?endpoint=${subgraphUrlBase}messari/${depo.hostedServiceId}&tab=protocol`);
+                    // navigate(`subgraph?endpoint=${subgraphUrlBase}messari/${depo.hostedServiceId}&tab=protocol`);
+                    navigate(`subgraph?endpoint=${depo.hostedServiceId}&tab=protocol`);
                   } else {
                     window.location.href = "https://okgraph.xyz/?q=messari/" + depo.hostedServiceId;
                   }

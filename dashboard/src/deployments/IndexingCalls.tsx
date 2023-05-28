@@ -33,7 +33,7 @@ function _helper(query: string, client: any): [any, { data: any, error: any, loa
       },
     ) as [any, { data: any, error: any, loading: any }];
   } catch (err) {
-    return [() => { }, { data: undefined, loading: undefined, error: undefined }];
+    return [() => { }, { data: true, loading: false, error: null }];
   }
 }
 

@@ -13,7 +13,7 @@ import {
 import { Chart as ChartJS, registerables } from "chart.js";
 import React, { useEffect, useMemo, useState } from "react";
 import { metaDataQuery, poolOverview, schema } from "../queries/schema";
-import { PoolName, PoolNames, ProtocolType, SubgraphBaseUrl } from "../constants";
+import { BaseUrl, PoolName, PoolNames, ProtocolType, SubgraphBaseUrl } from "../constants";
 import ErrorDisplay from "./ErrorDisplay";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router";
@@ -70,10 +70,13 @@ function ProtocolDashboard({ protocolJSON, getData, subgraphEndpoints, decentral
       }
     } else if (!subgraphParam.includes("/")) {
       if (subgraphParam?.toUpperCase()?.split("QM")?.length === 1) {
-        queryURL =
-          "https://gateway.thegraph.com/api/" + process.env.REACT_APP_GRAPH_API_KEY + "/subgraphs/id/" + subgraphParam;
+        // queryURL =
+        //   "https://gateway.thegraph.com/api/" + process.env.REACT_APP_GRAPH_API_KEY + "/subgraphs/id/" + subgraphParam;
+        queryURL = `${BaseUrl}/subgraphs/name/${subgraphParam}`;
+
       } else {
-        queryURL = "https://api.thegraph.com/subgraphs/id/" + subgraphParam;
+        // queryURL = "https://api.thegraph.com/subgraphs/id/" + subgraphParam;
+        queryURL = `${BaseUrl}/subgraphs/name/${subgraphParam}`;
       }
     }
   }
@@ -82,7 +85,9 @@ function ProtocolDashboard({ protocolJSON, getData, subgraphEndpoints, decentral
   const endpointObject: { [x: string]: string } = { current: "", pending: "" };
   endpointObject[version] = queryURL;
   if (subgraphName && !endpointObject.current) {
-    endpointObject.current = "https://api.thegraph.com/subgraphs/name/" + subgraphName;
+    // endpointObject.current = "https://api.thegraph.com/subgraphs/name/" + subgraphName;
+    endpointObject.current = `${BaseUrl}/subgraphs/name/${subgraphName}`;
+
   }
   const [endpoints, setEndpoints] = useState(endpointObject);
   const [isCurrentVersion, setIsCurrentVersion] = useState(version == "current" ? true : false);
@@ -90,13 +95,14 @@ function ProtocolDashboard({ protocolJSON, getData, subgraphEndpoints, decentral
   const [skipAmt, paginate] = useState<number>(skipAmtParam);
 
   const [overlayDeploymentClient, setOverlayDeploymentClient] = useState<ApolloClient<NormalizedCacheObject>>(
-    NewClient("https://api.thegraph.com/index-node/graphql"),
+    // NewClient("https://api.thegraph.com/index-node/graphql"),
+    NewClient(`${BaseUrl}/graphql`),
   );
   const [overlayDeploymentURL, setOverlayDeploymentURL] = useState<string>("");
   const [overlayError, setOverlayError] = useState<ApolloError | null>(null);
 
-  const clientIndexing = useMemo(() => NewClient("https://api.thegraph.com/index-node/graphql"), [subgraphParam]);
-
+  // const clientIndexing = useMemo(() => NewClient("https://api.thegraph.com/index-node/graphql"), [subgraphParam]);
+  const clientIndexing = useMemo(() => NewClient(`${BaseUrl}/graphql`), [subgraphParam]);
   const [getPendingSubgraph, { data: pendingVersion, error: errorSubId, loading: subIdLoading }] = useLazyQuery(
     getPendingSubgraphId,
     {

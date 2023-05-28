@@ -10,11 +10,9 @@ import { useEffect, useMemo, useState } from "react";
 import { NewClient, schemaMapping } from "./utils";
 import { useQuery } from "@apollo/client";
 import { decentralizedNetworkSubgraphsQuery } from "./queries/decentralizedNetworkSubgraphsQuery";
+import { BaseUrl } from "./constants";
 
 const deployment = require('./development.json');
-
-// console.log('deployment: ', deployment);
-
 function App() {
   console.log("RUNNING VERSION " + dashboardVersion);
   const [protocolsToQuery, setProtocolsToQuery] = useState<{
@@ -107,10 +105,10 @@ function App() {
             const networkKey = protocolKeyArr.pop();
             subgraphEndpoints[schemaType][protocolKeyArr.join("-")] = {};
             subgraphEndpoints[schemaType][protocolKeyArr.join("-")][networkKey] =
-              "https://api.thegraph.com/subgraphs/name/messari/" + depoData["services"]["hosted-service"]["slug"];
+              `${BaseUrl}/subgraphs/name/${depoData["services"]["hosted-service"]["slug"]}`;
           } else {
             subgraphEndpoints[schemaType][protocolName][depoData.network] =
-              "https://api.thegraph.com/subgraphs/name/messari/" + depoData["services"]["hosted-service"]["slug"];
+              `${BaseUrl}/subgraphs/name/${depoData["services"]["hosted-service"]["slug"]}`;
           }
           endpointSlugs.push(depoData["services"]["hosted-service"]["slug"]);
           if (!endpointSlugsByType[schemaType]) {
@@ -175,12 +173,12 @@ function App() {
         return;
       }
       fullCurrentQueryArray[fullCurrentQueryArray.length - 1] += `
-                ${name.split("-").join("_")}: indexingStatusForCurrentVersion(subgraphName: "messari/${name}") {
+                ${name.split("-").join("_")}: indexingStatusForCurrentVersion(subgraphName: "${name}") {
                   ${queryContents}
                 }
             `;
       fullPendingQueryArray[fullPendingQueryArray.length - 1] += `
-              ${name.split("-").join("_")}_pending: indexingStatusForPendingVersion(subgraphName: "messari/${name}") {
+              ${name.split("-").join("_")}_pending: indexingStatusForPendingVersion(subgraphName: "${name}") {
                 ${queryContents}
               }
           `;
@@ -195,7 +193,6 @@ function App() {
     });
     fullCurrentQueryArray[fullCurrentQueryArray.length - 1] += "}";
     fullPendingQueryArray[fullPendingQueryArray.length - 1] += "}";
-
     if (endpointSlugs.length === 0) {
       fullCurrentQueryArray = [
         `    query {
@@ -259,7 +256,6 @@ function App() {
       setDecentralizedDeployments(decenDepos);
     }
   }, [decentralized]);
-
   return (
     <div>
       <DashboardVersion />

@@ -111,7 +111,7 @@ function DeploymentsPage({
   const depoIdToSubgraphName: any = {};
   const depoIds: any = [];
   let decentralizedDepoQuery: any = "";
-
+  console.log('Object.keys(decentralizedDeployments)?.length: ', Object.keys(decentralizedDeployments)?.length);
   if (Object.keys(decentralizedDeployments)?.length) {
     Object.keys(decentralizedDeployments).forEach((x) => {
       const protocolObj = Object.keys(protocolsToQuery).find((pro) => pro.includes(x));
@@ -238,7 +238,6 @@ function DeploymentsPage({
       }
     });
   }
-
   return (
     <DeploymentsContextProvider>
       <DeploymentsLayout>
