@@ -1,4 +1,360 @@
 {
+  "aave-v2": {
+    "schema": "lending",
+    "base": "aave-forks",
+    "protocol": "aave-v2",
+    "project": "aave",
+    "deployments": {
+      "aave-v2-avalanche": {
+        "network": "avalanche",
+        "status": "prod",
+        "versions": {
+          "schema": "2.0.1",
+          "subgraph": "1.3.0",
+          "methodology": "1.0.0"
+        },
+        "files": {
+          "template": "aave.v2.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": false
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "aave-v2-avalanche",
+            "query-id": "aave-v2-avalanche"
+          },
+          "decentralized-network": {
+            "slug": "aave-v2-avalanche",
+            "query-id": "AQHJdvUMkPfSxi6Q2LxXYjWXjGvfCST8DFFYE4VUKtU6"
+          }
+        }
+      },
+      "aave-v2-ethereum": {
+        "network": "ethereum",
+        "status": "prod",
+        "versions": {
+          "schema": "2.0.1",
+          "subgraph": "1.3.0",
+          "methodology": "1.0.0"
+        },
+        "files": {
+          "template": "aave.v2.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": false
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "aave-v2-ethereum",
+            "query-id": "aave-v2-ethereum"
+          }
+        }
+      },
+      "aave-v2-polygon": {
+        "network": "polygon",
+        "status": "prod",
+        "versions": {
+          "schema": "2.0.1",
+          "subgraph": "1.2.18",
+          "methodology": "1.0.0"
+        },
+        "files": {
+          "template": "aave.v2.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": false
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "aave-v2-polygon",
+            "query-id": "aave-v2-polygon"
+          }
+        }
+      }
+    }
+  },
+  "aave-v3": {
+    "schema": "lending",
+    "base": "aave-forks",
+    "protocol": "aave-v3",
+    "project": "aave",
+    "deployments": {
+      "aave-v3-arbitrum": {
+        "network": "arbitrum",
+        "status": "prod",
+        "versions": {
+          "schema": "2.0.1",
+          "subgraph": "1.2.0",
+          "methodology": "1.0.1"
+        },
+        "files": {
+          "template": "aave.v3.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": false
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "aave-v3-arbitrum",
+            "query-id": "aave-v3-arbitrum"
+          }
+        }
+      },
+      "aave-v3-avalanche": {
+        "network": "avalanche",
+        "status": "prod",
+        "versions": {
+          "schema": "2.0.1",
+          "subgraph": "1.2.0",
+          "methodology": "1.0.1"
+        },
+        "files": {
+          "template": "aave.v3.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": false
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "aave-v3-avalanche",
+            "query-id": "aave-v3-avalanche"
+          },
+          "decentralized-network": {
+            "slug": "aave-v3-avalanche",
+            "query-id": "94D1g2jHHqKUS5uhbEPHWyRgfp4bYeZPn5Cr5R3zvoYH"
+          }
+        }
+      },
+      "aave-v3-fantom": {
+        "network": "fantom",
+        "status": "prod",
+        "versions": {
+          "schema": "2.0.1",
+          "subgraph": "1.2.0",
+          "methodology": "1.0.1"
+        },
+        "files": {
+          "template": "aave.v3.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": false
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "aave-v3-fantom",
+            "query-id": "aave-v3-fantom"
+          }
+        }
+      },
+      "aave-v3-harmony": {
+        "network": "harmony",
+        "status": "prod",
+        "versions": {
+          "schema": "2.0.1",
+          "subgraph": "1.2.0",
+          "methodology": "1.0.1"
+        },
+        "files": {
+          "template": "aave.v3.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": false
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "aave-v3-harmony",
+            "query-id": "aave-v3-harmony"
+          }
+        }
+      },
+      "aave-v3-polygon": {
+        "network": "polygon",
+        "status": "prod",
+        "versions": {
+          "schema": "2.0.1",
+          "subgraph": "1.2.0",
+          "methodology": "1.0.1"
+        },
+        "files": {
+          "template": "aave.v3.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": false
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "aave-v3-polygon",
+            "query-id": "aave-v3-polygon"
+          }
+        }
+      },
+      "aave-v3-optimism": {
+        "network": "optimism",
+        "status": "prod",
+        "versions": {
+          "schema": "2.0.1",
+          "subgraph": "1.2.0",
+          "methodology": "1.0.1"
+        },
+        "files": {
+          "template": "aave.v3.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": false
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "aave-v3-optimism",
+            "query-id": "aave-v3-optimism"
+          }
+        }
+      },
+      "aave-v3-ethereum": {
+        "network": "ethereum",
+        "status": "prod",
+        "versions": {
+          "schema": "2.0.1",
+          "subgraph": "1.1.0",
+          "methodology": "1.0.1"
+        },
+        "files": {
+          "template": "aave.v3.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": false
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "aave-v3-ethereum",
+            "query-id": "aave-v3-ethereum"
+          },
+          "decentralized-network": {
+            "slug": "aave-v3-ethereum",
+            "query-id": "HB1Z2EAw4rtPRYVb2Nz8QGFLHCpym6ByBX6vbCViuE9F"
+          }
+        }
+      }
+    }
+  },
+  "compound-v2": {
+    "schema": "lending",
+    "base": "compound-forks",
+    "protocol": "compound-v2",
+    "project": "compound",
+    "deployments": {
+      "compound-v2-ethereum": {
+        "network": "ethereum",
+        "status": "prod",
+        "versions": {
+          "schema": "2.0.1",
+          "subgraph": "1.8.0",
+          "methodology": "1.0.0"
+        },
+        "files": {
+          "template": "compound-v2.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": false
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "compound-v2-ethereum",
+            "query-id": "compound-v2-ethereum"
+          }
+        }
+      }
+    }
+  },
+  "compound-v3": {
+    "schema": "lending",
+    "base": "compound-v3",
+    "protocol": "compound-v3",
+    "project": "compound",
+    "deployments": {
+      "compound-v3-ethereum": {
+        "network": "ethereum",
+        "status": "prod",
+        "versions": {
+          "schema": "3.0.1",
+          "subgraph": "2.1.0",
+          "methodology": "1.0.0"
+        },
+        "files": {
+          "template": "compound.v3.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": false
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "compound-v3-ethereum",
+            "query-id": "compound-v3-ethereum"
+          },
+          "decentralized-network": {
+            "slug": "compound-v3-ethereum",
+            "query-id": "6PaB6tKFqrL6YoAELEhFGU6Gc39cEynLbo6ETZMF3sCy"
+          }
+        }
+      },
+      "compound-v3-polygon": {
+        "network": "polygon",
+        "status": "prod",
+        "versions": {
+          "schema": "3.0.1",
+          "subgraph": "1.1.0",
+          "methodology": "1.0.0"
+        },
+        "files": {
+          "template": "compound.v3.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": false
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "compound-v3-polygon",
+            "query-id": "compound-v3-polygon"
+          }
+        }
+      },
+      "compound-v3-arbitrum": {
+        "network": "arbitrum",
+        "status": "prod",
+        "versions": {
+          "schema": "3.0.1",
+          "subgraph": "1.1.0",
+          "methodology": "1.0.0"
+        },
+        "files": {
+          "template": "compound.v3.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": false
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "compound-v3-arbitrum",
+            "query-id": "compound-v3-arbitrum"
+          }
+        }
+      }
+    }
+  },
   "convex-finance": {
     "schema": "yield-aggregator",
     "base": "convex-finance",
@@ -28,6 +384,336 @@
           "decentralized-network": {
             "slug": "convex-finance",
             "query-id": "convex-finance"
+          }
+        }
+      }
+    }
+  },
+  "makerdao": {
+    "schema": "lending",
+    "base": "makerdao",
+    "protocol": "makerdao",
+    "project": "makerdao",
+    "deployments": {
+      "makerdao-ethereum": {
+        "network": "ethereum",
+        "status": "prod",
+        "versions": {
+          "schema": "2.0.1",
+          "subgraph": "2.3.0",
+          "methodology": "1.1.0"
+        },
+        "files": {
+          "template": "makerdao.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": false
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "makerdao-ethereum",
+            "query-id": "makerdao-ethereum"
+          }
+        }
+      }
+    }
+  },
+  "stargate": {
+    "schema": "bridge",
+    "base": "stargate",
+    "protocol": "stargate",
+    "project": "stargate",
+    "deployments": {
+      "stargate-ethereum": {
+        "network": "ethereum",
+        "status": "prod",
+        "versions": {
+          "schema": "1.1.0",
+          "subgraph": "1.0.2",
+          "methodology": "1.0.0"
+        },
+        "files": {
+          "template": "stargate.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": true
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "stargate-ethereum",
+            "query-id": "stargate-ethereum"
+          }
+        }
+      },
+      "stargate-avalanche": {
+        "network": "avalanche",
+        "status": "prod",
+        "versions": {
+          "schema": "1.1.0",
+          "subgraph": "1.0.2",
+          "methodology": "1.0.0"
+        },
+        "files": {
+          "template": "stargate.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": true
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "stargate-avalanche",
+            "query-id": "stargate-avalanche"
+          }
+        }
+      },
+      "stargate-bsc": {
+        "network": "bsc",
+        "status": "prod",
+        "versions": {
+          "schema": "1.1.0",
+          "subgraph": "1.0.2",
+          "methodology": "1.0.0"
+        },
+        "files": {
+          "template": "stargate.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": true
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "stargate-bsc",
+            "query-id": "stargate-bsc"
+          }
+        }
+      },
+      "stargate-arbitrum": {
+        "network": "arbitrum",
+        "status": "prod",
+        "versions": {
+          "schema": "1.1.0",
+          "subgraph": "1.0.2",
+          "methodology": "1.0.0"
+        },
+        "files": {
+          "template": "stargate.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": true
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "stargate-arbitrum",
+            "query-id": "stargate-arbitrum"
+          }
+        }
+      },
+      "stargate-polygon": {
+        "network": "polygon",
+        "status": "prod",
+        "versions": {
+          "schema": "1.1.0",
+          "subgraph": "1.0.2",
+          "methodology": "1.0.0"
+        },
+        "files": {
+          "template": "stargate.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": true
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "stargate-polygon",
+            "query-id": "stargate-polygon"
+          }
+        }
+      },
+      "stargate-optimism": {
+        "network": "optimism",
+        "status": "prod",
+        "versions": {
+          "schema": "1.1.0",
+          "subgraph": "1.0.2",
+          "methodology": "1.0.0"
+        },
+        "files": {
+          "template": "stargate.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": true
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "stargate-optimism",
+            "query-id": "stargate-optimism"
+          }
+        }
+      },
+      "stargate-fantom": {
+        "network": "fantom",
+        "status": "prod",
+        "versions": {
+          "schema": "1.1.0",
+          "subgraph": "1.0.2",
+          "methodology": "1.0.0"
+        },
+        "files": {
+          "template": "stargate.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": true
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "stargate-fantom",
+            "query-id": "stargate-fantom"
+          }
+        }
+      }
+    }
+  },
+  "tornado-cash": {
+    "schema": "generic",
+    "base": "tornado-cash",
+    "protocol": "tornado-cash",
+    "project": "tornado-cash",
+    "deployments": {
+      "tornado-cash-classic-ethereum": {
+        "network": "ethereum",
+        "status": "prod",
+        "versions": {
+          "schema": "1.4.0",
+          "subgraph": "1.0.3",
+          "methodology": "1.0.0"
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "tornado-cash-ethereum",
+            "query-id": "tornado-cash-ethereum"
+          },
+          "decentralized-network": {
+            "slug": "tornado-cash-classic-ethereum",
+            "query-id": "FxhN13aCD2H1f9vagrVueGjHwguZ7JkfuDZrMvKthdk5"
+          }
+        },
+        "files": {
+          "template": "tornado-cash.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": true
+        }
+      },
+      "tornado-cash-classic-bsc": {
+        "network": "bsc",
+        "status": "prod",
+        "versions": {
+          "schema": "1.4.0",
+          "subgraph": "1.0.3",
+          "methodology": "1.0.0"
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "tornado-cash-classic-bsc",
+            "query-id": "tornado-cash-classic-bsc"
+          }
+        },
+        "files": {
+          "template": "tornado-cash.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": true
+        }
+      }
+    }
+  },
+  "yearn-v2": {
+    "schema": "yield-aggregator",
+    "base": "yearn-v2",
+    "protocol": "yearn-v2",
+    "project": "yearn",
+    "deployments": {
+      "yearn-v2-arbitrum": {
+        "network": "arbitrum",
+        "status": "prod",
+        "versions": {
+          "schema": "1.3.0",
+          "subgraph": "1.2.2",
+          "methodology": "1.0.0"
+        },
+        "files": {
+          "template": "yearn.v2.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": false
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "yearn-v2-arbitrum",
+            "query-id": "yearn-v2-arbitrum"
+          },
+          "decentralized-network": {
+            "slug": "yearn-v2-arbitrum",
+            "query-id": "39F8fYCvLYmutjqpzEwx3dcEJTtFFVupvBzJqkEzftA7"
+          }
+        }
+      },
+      "yearn-v2-ethereum": {
+        "network": "ethereum",
+        "status": "prod",
+        "versions": {
+          "schema": "1.3.0",
+          "subgraph": "1.2.2",
+          "methodology": "1.0.0"
+        },
+        "files": {
+          "template": "yearn.v2.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": false
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "yearn-v2-ethereum",
+            "query-id": "yearn-v2-ethereum"
+          },
+          "decentralized-network": {
+            "slug": "yearn-v2-ethereum",
+            "query-id": "3CDiQ2hSrftreri8FLqsVAVTv9QNkEBszGZiDdmL4UQJ"
+          }
+        }
+      },
+      "yearn-v2-fantom": {
+        "network": "fantom",
+        "status": "dev",
+        "versions": {
+          "schema": "1.3.0",
+          "subgraph": "1.2.2",
+          "methodology": "1.0.0"
+        },
+        "files": {
+          "template": "yearn.v2.template.yaml"
+        },
+        "options": {
+          "prepare:yaml": true,
+          "prepare:constants": false
+        },
+        "services": {
+          "hosted-service": {
+            "slug": "yearn-v2-fantom",
+            "query-id": "yearn-v2-fantom"
           }
         }
       }
