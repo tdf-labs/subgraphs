@@ -70,13 +70,10 @@ function ProtocolDashboard({ protocolJSON, getData, subgraphEndpoints, decentral
       }
     } else if (!subgraphParam.includes("/")) {
       if (subgraphParam?.toUpperCase()?.split("QM")?.length === 1) {
-        // queryURL =
-        //   "https://gateway.thegraph.com/api/" + process.env.REACT_APP_GRAPH_API_KEY + "/subgraphs/id/" + subgraphParam;
-        queryURL = `${BaseUrl}/subgraphs/name/${subgraphParam}`;
+        queryURL = `${SubgraphBaseUrl}/${subgraphParam}`;
 
       } else {
-        // queryURL = "https://api.thegraph.com/subgraphs/id/" + subgraphParam;
-        queryURL = `${BaseUrl}/subgraphs/name/${subgraphParam}`;
+        queryURL = `${SubgraphBaseUrl}/${subgraphParam}`;
       }
     }
   }
@@ -85,9 +82,7 @@ function ProtocolDashboard({ protocolJSON, getData, subgraphEndpoints, decentral
   const endpointObject: { [x: string]: string } = { current: "", pending: "" };
   endpointObject[version] = queryURL;
   if (subgraphName && !endpointObject.current) {
-    // endpointObject.current = "https://api.thegraph.com/subgraphs/name/" + subgraphName;
-    endpointObject.current = `${BaseUrl}/subgraphs/name/${subgraphName}`;
-
+    endpointObject.current = `${SubgraphBaseUrl}/${subgraphName}`;
   }
   const [endpoints, setEndpoints] = useState(endpointObject);
   const [isCurrentVersion, setIsCurrentVersion] = useState(version == "current" ? true : false);
@@ -95,7 +90,6 @@ function ProtocolDashboard({ protocolJSON, getData, subgraphEndpoints, decentral
   const [skipAmt, paginate] = useState<number>(skipAmtParam);
 
   const [overlayDeploymentClient, setOverlayDeploymentClient] = useState<ApolloClient<NormalizedCacheObject>>(
-    // NewClient("https://api.thegraph.com/index-node/graphql"),
     NewClient(`${BaseUrl}/graphql`),
   );
   const [overlayDeploymentURL, setOverlayDeploymentURL] = useState<string>("");
@@ -121,15 +115,8 @@ function ProtocolDashboard({ protocolJSON, getData, subgraphEndpoints, decentral
   const [positionSnapshots, setPositionSnapshots] = useState();
   const [positionsLoading, setPositionsLoading] = useState(false);
   ChartJS.register(...registerables);
-  const client = useMemo(() => {
-    return new ApolloClient({
-      link: new HttpLink({
-        uri: subgraphToQuery.url,
-      }),
-      cache: new InMemoryCache(),
-    });
-  }, [subgraphToQuery.url]);
 
+  const client = useMemo(() => NewClient(subgraphToQuery.url), [subgraphToQuery.url]);
   // This query is to fetch data about the protocol. This helps select the proper schema to make the full query
   const {
     data: protocolSchemaData,

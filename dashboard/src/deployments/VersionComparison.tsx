@@ -5,7 +5,7 @@ import { Chart as ChartJS, registerables, PointElement } from "chart.js";
 import FetchSubgraphVersion from "./FetchSubgraphVersion";
 import { useNavigate } from "react-router";
 import FetchIndexingStatusForType from "./FetchIndexingStatusForType";
-import { BaseUrl } from '../constants';
+import { BaseUrl, SubgraphBaseUrl } from '../constants';
 
 interface VersionComparisonProps {
   protocolsToQuery: { [x: string]: any };
@@ -97,8 +97,7 @@ function VersionComparison({ protocolsToQuery, getData }: VersionComparisonProps
       <>
         {prodDeploymentsToQuery.map((depo: any) => {
           let slug = depo?.["services"]?.["hosted-service"]?.["slug"];
-          // let endpoint = "https://api.thegraph.com/subgraphs/name/messari/" + slug;
-          let endpoint = `${BaseUrl}/subgraphs/name/${slug}`;
+          let endpoint = `${SubgraphBaseUrl}/${slug}`;
           if (depo.network === "cronos") {
             slug = depo?.["services"]?.["cronos-portal"]?.["slug"];
             endpoint = "https://graph.cronoslabs.com/subgraphs/name/messari/" + slug;

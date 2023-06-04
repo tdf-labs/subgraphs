@@ -81,9 +81,11 @@ export const listSchemaVersionsByType: { [x: string]: string[] } = {
   option: versionsListOption,
 };
 
-export const BaseUrl = "https://hetnzer.graph.tdf-labs.io"
+// export const BaseUrl = "https://hetzner.graph.tdf-labs.io"
+// export const SubgraphBaseUrl = `${BaseUrl}/subgraphs/name/`;
 
-export const SubgraphBaseUrl = `${BaseUrl}/subgraphs/name/`;
+export const BaseUrl = 'http://hetzner.graph.tdf-labs.io:8030';
+export const SubgraphBaseUrl = `http://hetzner.graph.tdf-labs.io:8000/subgraphs/name`;
 
 export const PoolName: Record<string, string> = {
   EXCHANGE: "liquidityPool",

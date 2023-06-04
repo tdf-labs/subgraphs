@@ -10,7 +10,7 @@ import { useEffect, useMemo, useState } from "react";
 import { NewClient, schemaMapping } from "./utils";
 import { useQuery } from "@apollo/client";
 import { decentralizedNetworkSubgraphsQuery } from "./queries/decentralizedNetworkSubgraphsQuery";
-import { BaseUrl } from "./constants";
+import { BaseUrl, SubgraphBaseUrl } from "./constants";
 
 const deployment = require('./development.json');
 function App() {
@@ -105,10 +105,12 @@ function App() {
             const networkKey = protocolKeyArr.pop();
             subgraphEndpoints[schemaType][protocolKeyArr.join("-")] = {};
             subgraphEndpoints[schemaType][protocolKeyArr.join("-")][networkKey] =
-              `${BaseUrl}/subgraphs/name/${depoData["services"]["hosted-service"]["slug"]}`;
+              `${SubgraphBaseUrl}/${depoData["services"]["hosted-service"]["slug"]}`;
+
           } else {
+
             subgraphEndpoints[schemaType][protocolName][depoData.network] =
-              `${BaseUrl}/subgraphs/name/${depoData["services"]["hosted-service"]["slug"]}`;
+              `${SubgraphBaseUrl}/${depoData["services"]["hosted-service"]["slug"]}`;
           }
           endpointSlugs.push(depoData["services"]["hosted-service"]["slug"]);
           if (!endpointSlugsByType[schemaType]) {
